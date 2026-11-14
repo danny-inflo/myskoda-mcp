@@ -8,13 +8,44 @@ Sites manages hosting and authentication. No personal Cloudflare account is requ
 2. Open the directory in Codex with the Sites plugin enabled.
 3. Give Codex this instruction:
 
-   > Deploy this repository as a NEW private Site in my current account using the Sites plugin. Follow its supported source and publishing workflow. Preserve the application and MCP tools. The template .openai/hosting.json must have no project_id; if it already has one, stop and use a fresh clone. Use D1 binding DB, no R2, and the mcp capability. Configure a NEW 32-byte base64 VEHICLE_VAULT_KEY secret for this instance without exposing it in chat or source. Apply the checked-in migrations, build the Sites variant and run npx astryx doctor --built dist. Never copy another instance's secrets or records. Do not enable controls or send vehicle commands. Report the deployed URL and provisioned personal MCP plugin.
+   > Deploy this repository as a NEW owner-private ChatGPT Site in my currently authenticated account using the Sites plugin. Read AGENTS.md and docs/AGENT_DEPLOYMENT.md, then follow the deploy-myskoda procedure with target sites. Complete the deployment and return its URL and provisioned personal MCP plugin. If the required Sites tools are unavailable, explain what is missing without switching hosting providers.
 
 4. If the platform requires owner entry, save `VEHICLE_VAULT_KEY` directly in the Site's settings with **Secret** enabled. Generate a new value locally with `node -e "process.stdout.write(require('node:crypto').randomBytes(32).toString('base64'))"`. Do not paste it into chat. Keep a secure backup: losing/changing the key makes existing encrypted data unreadable.
 5. Open the new Site, sign in, and enter your VIN and MyŠkoda API key in the setup form. Choose **Read only** initially.
 6. Connect the personal plugin created for this Site. First call `get_connection_status`: it reads local metadata without contacting the vehicle.
 
 `npm run prepare:sites` checks the unprovisioned template locally. It does not create or publish a Site. The installed Sites plugin supplies its own helpers and handles provisioning, source synchronization, storage and publication; no machine-specific helper path is required in the public repository.
+
+## One prompt from the repository URL
+
+In Codex with the Sites plugin connected, use:
+
+```text
+Clone https://github.com/danny-inflo/myskoda-mcp into a fresh directory and deploy it as a NEW owner-private ChatGPT Site in my currently authenticated account using the Sites plugin.
+Read AGENTS.md and docs/AGENT_DEPLOYMENT.md from the clone, then follow the deploy-myskoda procedure with target sites.
+Complete the deployment and return its URL and provisioned personal MCP plugin. If Sites tools are unavailable, explain what is missing without switching hosting providers.
+```
+
+If the clone is already open as the Codex project and its repository skills are
+loaded, the shorter invocation is `$deploy-myskoda sites`. Otherwise, read the
+shared procedure directly; deployment does not depend on skill auto-discovery.
+
+The checked-in skill gives the agent the procedure. It does not sign in, install
+the Sites connector or grant account access. Account/workspace selection,
+platform approvals and owner-only secret entry may still require the user.
+
+## Claude Code
+
+Claude Code can load the repository's `/deploy-myskoda` skill too, but the repo
+does not give it the Codex Sites plugin or Sites provisioning credentials. Do
+not assume that `/deploy-myskoda sites` can publish from a plain Claude Code
+installation. Its capability check must report missing Sites tools.
+
+For deployment from Claude Code, use `/deploy-myskoda cloudflare` with your own
+Cloudflare account and follow the [Cloudflare guide](DEPLOY_CLOUDFLARE.md).
+Deploying the application and connecting to its resulting MCP endpoint are
+separate operations. A standalone HTTP/OAuth endpoint can be configured as a
+Claude Code MCP server; this is not a claim of a completed live Claude Code test.
 
 ## Configuration and updates
 

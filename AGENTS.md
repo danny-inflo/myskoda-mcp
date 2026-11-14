@@ -2,6 +2,23 @@
 
 Project-specific guidance for AI coding agents.
 
+## Deployment
+
+For deployment requests, use the repository's `deploy-myskoda` skill and read
+`docs/AGENT_DEPLOYMENT.md`. Codex discovers it in `.agents/skills`; Claude Code
+discovers it in `.claude/skills`. If skill discovery is unavailable, read that
+document directly. Questions about deployment do not authorize creating or
+publishing an instance.
+
+Honor the selected target (`sites` or `cloudflare`). Sites needs its authenticated
+plugin tools; a skill file does not supply those tools. If they are unavailable,
+explain the missing capability without silently changing the hosting provider.
+
+For a new installation, use fresh resources and an independent vault key.
+Preserve an existing Site ID when resuming; do not create a duplicate or erase a
+provisioned manifest. Never publish instance configuration or secrets back to
+the public template. Keep controls off during setup and verification.
+
 <!-- ASTRYX:START -->
 Astryx v0.7.5 · 173 components
 CLI: run every command as `npx astryx <cmd>` (shown below as `astryx ...`).

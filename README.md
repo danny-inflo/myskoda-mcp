@@ -19,6 +19,27 @@ Each installation has its own database and encryption key. The repository includ
 
 The standalone deployment is **single-owner**. Sites retains its platform-managed per-user access and data isolation. The two deployments do not share accounts, data or authorizations.
 
+## Deploy with an agent
+
+With the Sites plugin connected in Codex:
+
+```text
+Clone https://github.com/danny-inflo/myskoda-mcp into a fresh directory and deploy it as a NEW owner-private ChatGPT Site in my currently authenticated account using the Sites plugin.
+Read AGENTS.md and docs/AGENT_DEPLOYMENT.md from the clone, then follow the deploy-myskoda procedure with target sites.
+Complete the deployment and return its URL and provisioned personal MCP plugin. If Sites tools are unavailable, explain what is missing without switching hosting providers.
+```
+
+After opening a clone, Codex can invoke `$deploy-myskoda sites`. Claude Code can
+invoke `/deploy-myskoda cloudflare` to use the independent Cloudflare route.
+Repository skills are checked in for both clients, with one shared
+[deployment procedure](docs/AGENT_DEPLOYMENT.md). If skill discovery is unavailable,
+read that document directly.
+
+A skill provides instructions, not hosting access. Plain Claude Code does not
+gain the Sites plugin by cloning this repo. The standalone endpoint uses
+standard HTTP/OAuth MCP, but a live connection from a particular client still
+needs verification. See the target guides for required sign-in and setup.
+
 ## Requirements
 
 - Node.js 24 or newer and npm.

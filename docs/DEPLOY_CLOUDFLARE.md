@@ -4,6 +4,14 @@ This variant runs a Worker, D1 database and OAuth KV namespace in your account. 
 
 Start with a fresh clone and new resources. This procedure does not migrate Sites identities, encrypted data or the existing personal plugin.
 
+## Agent-assisted setup
+
+Open the clone in Codex and use `$deploy-myskoda cloudflare`, or in Claude Code
+and use `/deploy-myskoda cloudflare`. Both skills read the same
+[agent procedure](AGENT_DEPLOYMENT.md) and this guide. If the skill is not loaded,
+ask the agent to read those files directly and deploy to your Cloudflare account.
+Your own Wrangler sign-in and GitHub OAuth app are still required.
+
 ## 1. Install and provision
 
 ```sh
@@ -73,6 +81,18 @@ The deploy helper checks configuration, requires a standalone build and runs `wr
 2. Add `PUBLIC_BASE_URL/mcp` to a remote HTTP MCP client with OAuth support, following that client's current instructions.
 3. Check the consent screen's client identity, redirect hostname and scopes. Approval grants integration access; it does not enable vehicle controls.
 4. Call `get_connection_status` first. Check the instance URL and disabled controls. Do not send a vehicle command as a smoke test.
+
+For Claude Code, after deployment substitute your actual origin in:
+
+```sh
+claude mcp add --transport http myskoda https://YOUR-INSTANCE/mcp
+claude mcp login myskoda
+```
+
+Then check `/mcp` in Claude Code and request only `get_connection_status` for
+the first verification. These commands use the standalone endpoint's OAuth;
+they do not install Sites deployment tools or transfer a Sites personal plugin.
+This repository has not yet been live-tested with a real Claude Code account.
 
 The pinned Cloudflare OAuth library handles MCP discovery, PKCE, token issuance, revocation and refresh. Access tokens last 15 minutes, refresh grants 30 days. Browser sessions last seven days. Browser sign-out deletes the current session; it does **not** revoke MCP grants. Disconnect the MCP client through its OAuth revocation flow when access should end. Vehicle disconnect separately removes the stored vehicle connection and control grants.
 

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Deploy MyŠkoda MCP"
+  short_description: "Deploy MyŠkoda MCP to Sites or your Cloudflare account"
+  default_prompt: "Use $deploy-myskoda with target sites to deploy this repository as a new private Site in my currently authenticated account."
