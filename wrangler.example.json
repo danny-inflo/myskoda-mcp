@@ -1,0 +1,25 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "myskoda-mcp",
+  "main": "worker/index.ts",
+  "compatibility_date": "2026-05-15",
+  "compatibility_flags": ["nodejs_compat", "global_fetch_strictly_public"],
+  "workers_dev": true,
+  "d1_databases": [{
+    "binding": "DB",
+    "database_name": "myskoda-mcp",
+    "database_id": "00000000-0000-4000-8000-000000000000",
+    "migrations_dir": "drizzle"
+  }],
+  "kv_namespaces": [{
+    "binding": "OAUTH_KV",
+    "id": "00000000000000000000000000000000"
+  }],
+  "vars": {
+    "DEPLOYMENT_TARGET": "cloudflare",
+    "PUBLIC_BASE_URL": "https://myskoda-mcp.YOUR-SUBDOMAIN.workers.dev",
+    "GITHUB_CLIENT_ID": "REPLACE_WITH_YOUR_GITHUB_OAUTH_CLIENT_ID",
+    "GITHUB_OWNER_ID": "REPLACE_WITH_YOUR_NUMERIC_GITHUB_ID"
+  },
+  "observability": { "enabled": false }
+}

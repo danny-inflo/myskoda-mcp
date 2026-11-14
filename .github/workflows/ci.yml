@@ -1,0 +1,38 @@
+name: Validate
+on:
+  push:
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npm run typecheck
+      - run: npm test
+      - run: npm run theme:check
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        target: [sites, cloudflare]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - if: matrix.target == 'sites'
+        run: npm run build
+      - if: matrix.target == 'cloudflare'
+        run: npm run build:cloudflare
+      - run: npx astryx doctor --built dist
+      - if: matrix.target == 'cloudflare'
+        run: npm run verify:cloudflare

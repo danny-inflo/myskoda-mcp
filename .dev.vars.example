@@ -1,0 +1,5 @@
+# Copy to .dev.vars for local development only. Never commit real values.
+# Generate a separate vault key for every instance:
+# node -e "process.stdout.write(require('node:crypto').randomBytes(32).toString('base64'))"
+VEHICLE_VAULT_KEY=
+GITHUB_CLIENT_SECRET=

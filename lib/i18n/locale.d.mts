@@ -1,0 +1,12 @@
+export type Locale = 'cs'|'sk'|'de'|'pl'|'hu'|'en'|'fr'|'it'|'es'|'nl'|'da'|'tr'|'sv'|'nb'|'fi'|'ro'|'sl'|'hr';
+export type Preference = Locale|'auto';
+export const LANGUAGE_COOKIE: string;
+export const LANGUAGES: readonly {readonly code:Locale;readonly name:string;readonly tag:string}[];
+export const SUPPORTED_LANGUAGES: readonly Locale[];
+export function normalizeLanguage(value:unknown):Locale|null;
+export function isLanguage(value:unknown):value is Locale;
+export function languagePreference(cookie?:string):Preference;
+export function detectLanguage(preferences?:readonly string[]):Locale;
+export function languageFromHeader(value?:string):Locale;
+export function resolveLanguage(cookie?:string,acceptLanguage?:string):{preference:Preference;locale:Locale};
+export function localeTag(locale:string):string;

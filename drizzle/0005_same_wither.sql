@@ -1,0 +1,1 @@
+ALTER TABLE `connections` ADD `setup_completed` integer DEFAULT 1 NOT NULL;
