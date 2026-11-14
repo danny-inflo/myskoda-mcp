@@ -15,7 +15,7 @@ Vehicle control is **off by default**. Each control group needs permission in se
 | Costs and limits | Current Sites plan and hosting terms | Cloudflare plan and resource usage |
 | Instructions | [Deploy with Sites](docs/DEPLOY_SITES.md) | [Deploy to Cloudflare](docs/DEPLOY_CLOUDFLARE.md) |
 
-Each installation has its own database and encryption key. The repository includes no running Site identity, production credentials, user data or third-party chatbot. Publishing the code does not connect anyone to the author's service.
+Each installation has its own database and encryption key. The repository includes no running Site identity, production credentials or user data. Publishing the code does not connect anyone to the author's service.
 
 The standalone deployment is **single-owner**. Sites retains its platform-managed per-user access and data isolation. The two deployments do not share accounts, data or authorizations.
 

@@ -2,7 +2,7 @@
 
 ## Unreleased
 
-- Prepare a portable public template with separate Sites and standalone Cloudflare builds, configuration examples and deployment guides; remove the original Site identity and embedded chatbot.
+- Prepare a portable public template with separate Sites and standalone Cloudflare builds, configuration examples and deployment guides; remove the original Site identity and deployment-specific integrations.
 - Add owner-restricted GitHub web sign-in and OAuth 2.1 for standalone MCP clients, browser-bound consent, hashed sessions and default-off vehicle controls.
 - Add authentication migrations and regression tests; validate both deployment targets in CI.
 
